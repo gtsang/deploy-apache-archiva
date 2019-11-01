@@ -1,0 +1,20 @@
+---
+- name: Install and start an Apache Archiva Repository Server
+  hosts: archiva
+  become: True
+  tasks:
+    - name: install wget
+      yum:
+        name: wget
+
+    - name: download Apache Archiva gzip
+      shell: wget -P /home/centos http://ftp.twaren.net/Unix/Web/apache/archiva/2.2.4/binaries/apache-archiva-2.2.4-bin.tar.gz
+
+    - name: unzip Apache Archive gzip
+      unarchive:
+        remote_src: yes
+        src: /home/centos/apache-archiva-2.2.4-bin.tar.gz
+        dest: /home/centos/
+
+    - name: start archiva server
+      shell: /home/centos/apache-archiva-2.2.4/bin/archiva start

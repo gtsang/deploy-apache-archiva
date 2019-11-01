@@ -1,0 +1,15 @@
+---
+- name: execute init-bastion.yaml playbook task
+  import_playbook: init-bastion.yaml
+
+- name: execute install-jvm.yaml playbook task
+  import_playbook: install-jvm.yaml
+
+- name: execute install-nginx.yaml playbook task
+  import_playbook: install-nginx.yaml
+
+- name: execute install-archiva.yaml
+  import_playbook: install-archiva.yaml
+
+- name: execute configure-nginx-archiva.yaml
+  import_playbook: configure-nginx-archiva.yaml

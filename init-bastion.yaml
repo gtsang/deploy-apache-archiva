@@ -1,0 +1,12 @@
+---
+- name: Initialize the bastion server
+  hosts: nginx
+  become: True
+  tasks:
+    - name: copy hosts file to remote
+      copy:
+        src: /etc/hosts
+        dest: /etc/hosts
+        owner: centos
+        group: centos
+    

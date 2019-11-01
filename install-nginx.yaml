@@ -1,0 +1,22 @@
+---
+- name: Configure webserver with nginx
+  hosts: nginx
+  become: True
+  tasks:
+    - name: copy nginx repo to remote
+      copy:
+        src: ./nginx.repo
+        dest: /etc/yum.repos.d/nginx.repo
+        owner: centos
+        group: centos
+        mode: u=rw,g=r,o=r
+    
+    - name: install nginx
+      yum:
+        name: nginx
+
+    - name: allow httpd_t through SELinux
+      shell: semanage permissive -a httpd_t
+
+    - name: start nginx server
+      service: name=nginx state=restarted

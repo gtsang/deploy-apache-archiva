@@ -1,0 +1,8 @@
+---
+- name: Install JVM
+  hosts: all
+  become: True
+  tasks:
+    - name: install JVM SDK
+      yum:
+        name: java-1.8.0-openjdk-devel.x86_64
